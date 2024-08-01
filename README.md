@@ -1,8 +1,86 @@
 ## MCP-Reborn [![Build Status](https://github.com/Hexeption/MCP-Reborn/workflows/Java%20CI/badge.svg)](https://github.com/Hexeption/MCP-Reborn/actions?workflow=Java+CI)
+RU/RUS
+#### MCP-Reborn — это MCP (Mod Coder Pack) для Minecraft для создания модифицированных клиентов для Minecraft и исследования его кода. Он основан на MCPConfig и ForgeGradle от MinecraftForge Team.
 
+### :warning: ПРЕДУПРЕЖДЕНИЕ :warning:: Вы **МОЖЕТЕ** публиковать какой-либо код, сгенерированный этим ремейком.
+
+### Поддерживаемые версии:
+1.13->1.20.2
+
+### Важно
+1.17< Требуется JDK 16
+
+1.18> Требуется JDK 17
+
+### Как использовать
+
+1. Импортируйте build.gradle в Intellij.
+
+2. Запустите задачу Gradle "setup" в папке mcp в IntelliJ — вам может потребоваться выбрать View > Tool Windows > Gradle, чтобы получить эту опцию.
+
+<img width="284" alt="373de4ebc77d5079584370dd7fbe8745" src="https://user-images.githubusercontent.com/4052647/46925924-71b7b680-d026-11e8-9c29-e3ed2e43f810.png">
+
+Это сгенерирует декомпилированный исходный код, который теперь можно найти в папке "src" в проекте.
+
+3. Измените исходный код по своему усмотрению.
+
+4. Чтобы протестировать измененный код, вернитесь к списку задач Gradle (где вы запускали настройку) и запустите задачу "runclient".
+Это скомпилирует вашу новую, измененную игру и запустит ее, чтобы вы могли протестировать ее.<br>**Примечание: вы также можете запустить автоматически сгенерированную конфигурацию запуска «Minecraft»**
+
+5. Как только вы достигли окончательного результата, которым вы довольны, есть небольшой процесс, чтобы превратить его в файл JAR, который
+можно запустить из лаунчера игры. Перейдите в папку «build» в задачах Gradle и запустите задачу «build». Это
+сгенерирует новый исполняемый файл JAR в каталоге «build/libs/».
+
+<img width="266" alt="a647ab0eb336062ffd80c8e053e10266" src="https://user-images.githubusercontent.com/4052647/46925963-a297eb80-d026-11e8-8b02-cb621b559511.png">
+
+6. Сгенерировав этот JAR, откройте папку версий Minecraft. В Linux это по умолчанию `~/.minecraft/versions`. В Windows это `AppData/Roaming/.minecraft/versions`. Найдите вариант, на котором основана ваша модифицированная версия (то есть, если
+вы модифицировали 1.16.4, найдите папку 1.16.4). Дублируйте эту папку и переименуйте ее. Я модифицировал villagers, поэтому
+я назвал его «1.16.4_villager_mod».
+
+7. Перейдите в эту папку и удалите оригинальный файл JAR Minecraft. Затем переименуйте файл JSON, чтобы он был идентичен
+имени папки. Для меня это было «1.16.4_villager_mod.json».
+
+8. Используя текстовый редактор, найдите первый экземпляр «downloads»: это сообщает Minecraft, где получить файл JAR игры.
+Если вы оставите это, Minecraft автоматически загрузит ванильный JAR. Но мы хотим запустить ваш новый модифицированный JAR.
+Итак, удалите все из этих "загрузок": через заголовки client, server и server_mappings, которые в конечном итоге заканчиваются
+на `/server.txt"}},`. После того, как вы удалите это, этот раздел должен содержать `"assets": "1.16", "complianceLevel": 1, "id": "1.16.4"`.
+Последнее, что нам нужно сделать в этом файле JSON, — это изменить это поле ID, чтобы оно соответствовало имени папки и
+файла JSON. Так что в этом случае нам нужно `"id":"1.16.4_villager_mod"`.
+
+9. Теперь возьмите ваш новый файл JAR из каталога build/libs/ и скопируйте его в эту же папку версии, и, в последний раз, переименуйте его в новое имя, которое мы использовали — 1.16.4_villager_mod.jar.
+
+10. Используйте менеджер архивов (Ubuntu поставляется со встроенным менеджером; пользователи Windows могут загрузить 7-Zip), откройте файл JAR базовой версии (в данном случае 1.16.4.jar, который вы найдете в его папке) и ваш файл JAR. Вам нужно будет скопировать 4
+файла/папки из базового JAR в ваш новый.
+
+1. Папка "assets"
+2. Папка "data"
+3. Файл "pack.png"
+4. Файл "pack.mcmeta"
+
+11. Наконец, все еще в этом менеджере архивов, удалите папку META-INF из вашего нового JAR.
+
+12. Теперь все ваши файлы должны быть настроены. В лаунчере Minecraft (закройте и снова откройте его, если он уже открыт) перейдите в раздел
+"Installations" в левом верхнем углу, а затем создайте новую установку. Назовите ее как хотите. Для версии выберите
+созданную вами версию (1.16.4_villager_mod.jar). Создайте его, затем вернитесь на главный экран лаунчера, нажав «Воспроизвести» в левом верхнем углу. В левом нижнем углу выберите новую пользовательскую версию и нажмите большую зеленую кнопку «Воспроизвести».
+
+### Как добавить Optifine
+
+[![](https://img.youtube.com/vi/ocz1tPI_YSE/0.jpg)](https://www.youtube.com/watch?v=ocz1tPI_YSE «Как добавить Optifine в MCP Reborn»)
+
+### Создатели:
+
+* Hexeption
+* kingdevnl
+
+### Ремейкеры:
+
+* Savely22827
+#### Особая благодарность: команде **MinecraftForge**, Hexeption и kingdevnl, которые сделали этот ремейк возможным. ❤
+
+EN/ENG:
 #### MCP-Reborn is an MCP (Mod Coder Pack) for minecraft for making modded clients for minecraft and researching its code. It is based on MCPConfig and ForgeGradle by MinecraftForge Team.
 
-### :warning: WARNING :warning::  You **CANNOT** publish any code generated by this tool.
+### :warning: WARNING :warning:: You **MAY** post any code generated by this remake.
 
 ### Supported versions:
 1.13->1.20.2
@@ -79,5 +157,4 @@
 ### Remakers:
 
 * Savely22827
-#### Special thanks to: **MinecraftForge** Team who made this tool possible. ❤
-
+#### Special thanks to: The **MinecraftForge** team, Hexeption and kingdevnl who made this remake possible. ❤
